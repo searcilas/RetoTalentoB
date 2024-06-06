@@ -1,6 +1,6 @@
 import React from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import './WelcomePage.css'; // Importamos el archivo de estilos
+import './WelcomePage.css';
 
 const WelcomePage = () => {
   const location = useLocation();

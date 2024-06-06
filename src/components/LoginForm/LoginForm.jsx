@@ -17,13 +17,16 @@ const LoginForm = () => {
             const userData = response.data[0];
             
             if (userData) {
-                // Simular autenticación exitosa con cualquier contraseña
+                // Token
+                const token = `fake-token-${userData.id}`;
+                // Token en localStorage
+                localStorage.setItem('authToken', token);
                 navigate('/bienvenido', { state: { user: userData } });
             } else {
                 setError("Credenciales inválidas");
                 setTimeout(() => {
                     setError("");
-                }, 2100); // Ocultar el mensaje de error después de 2 segundos
+                }, 2100); // 2.1s
             }
         } catch (error) {
             setError("Error en el inicio de sesión");

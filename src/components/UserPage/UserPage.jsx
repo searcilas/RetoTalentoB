@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import './UserPage.css';
 
@@ -9,8 +9,17 @@ const UserPage = () => {
   const [editable, setEditable] = useState(false);
   const [editedUserData, setEditedUserData] = useState(userData);
 
+  useEffect(() => {
+    const authToken = localStorage.getItem('authToken');
+    if (!authToken) {
+      navigate('/');
+    }
+  }, [navigate]);
+
   const handleLogout = () => {
-    localStorage.removeItem('token');
+    localStorage.removeItem('authToken');
+    // Datos al cerrar la sesión
+    setEditedUserData(null);
     navigate('/');
   };
 
@@ -19,10 +28,9 @@ const UserPage = () => {
   };
 
   const handleSave = () => {
-    // Aquí puedes enviar los datos editados a la API si es necesario
     console.log('Datos editados:', editedUserData);
     setEditable(false);
-    // Actualizar userData con los datos editados solo visualmente
+    // Actualizar datos solo visualmente porque la API externa que se está usando no es modificable
     location.state.user = { ...editedUserData };
   };
 
@@ -95,9 +103,9 @@ const UserPage = () => {
           <p><strong>Nombre de usuario:</strong> {userData.username}</p>
           <p><strong>Ciudad:</strong> {userData.address.city}</p>
           <p><strong>Teléfono:</strong> {userData.phone}</p>
-        <div className="edit-button">
-          <button onClick={handleEdit} className="edit-button">Editar</button>
-        </div>
+          <div className="edit-button">
+            <button onClick={handleEdit} className="edit-button">Editar</button>
+          </div>
           <button onClick={handleLogout} className="logout-button">Cerrar Sesión</button>
         </div>
       )}
@@ -107,6 +115,7 @@ const UserPage = () => {
 };
 
 export default UserPage;
+
 
 
 
