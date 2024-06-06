@@ -1,0 +1,22 @@
+.wrapper {
+    padding: 20px;
+    border-radius: 10px;
+    max-width: 400px;
+    margin: auto;
+    text-align: center;
+    backdrop-filter: blur(30px);
+  }
+  
+  .wrapper h1 {
+    color: #ffffff;
+    margin-bottom: 20px;
+  }
+  
+  .user-info p {
+    margin-bottom: 20px;
+  }
+  
+  .button-container {
+    margin-top: 20px;
+  }
+  
